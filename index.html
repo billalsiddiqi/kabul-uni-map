@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kabul University Faculties Map">
+    <meta name="keywords" content="Kabul University, Kabul, Afghanistan, University, Map, Direction">
+    <meta name="author" content="Billal Siddiqi">
+    <title>Kabul University Map</title>
+
+    <link rel="stylesheet" href="./Assets/Style/main.css">
+    
+    
+    <!-- Leaflet Map CSS Links -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+   
+
+</head>
+<body>
+<!-- Main Container Start -->
+    <div class="main-container">
+        <!-- Left Section (Faculties) -->
+        <section class="left-section">
+            <div class="content">
+                <h1>Kabul University Map</h1>
+                <h3>Faculties: </h3>
+                <ul>
+                    <li id="law" class="active"><a class="list" onclick="lawClick()">The Faculty of Law and Political Sciences</a></li>
+                    <li id="es"><a onclick="esClick()">The Faculty of Environment Science</a></li>
+                    <li id="cs"><a onclick="csClick()">The Faculty of Computer Science</a></li>
+                    <li id="ec"><a onclick="ecClick()">The Faculty of Economics</a></li>
+                    <li id="sc"><a onclick="scClick()">The Faculty of Science</a></li>
+                    <li id="en"><a onclick="enClick()">The Faculty of Engineering</a></li>
+                    <li id="ph"><a onclick="phClick()">The Faculty of Pharmacy</a></li>
+                    <li id="ag"><a onclick="agClick()">The Faculty of Agriculture</a></li>
+                    <li id="vm"><a onclick="vmClick()">The Faculty of Veterinary Medicine</a></li>
+                    <li id="jo"><a onclick="joClick()">The Faculty of Journalism</a></li>
+                    <li id="ar"><a onclick="arClick()">The Allama Iqbal Faculty of Arts</a></li>
+                    <li id="ll"><a onclick="llClick()">The Faculty of Language and Literature</a></li>
+                    <li id="fa"><a onclick="faClick()">The Faculty of Fine Arts</a></li>
+                    <li id="is"><a onclick="isClick()">The Faculty of Islamic Studies</a></li>
+                    <li id="ss"><a onclick="ssClick()">The Faculty of Social Science</a></li>
+                    <li id="esf"><a onclick="esfClick()">Psychology and Educational Science Faculty</a></li>
+                </ul>
+            </div>
+        </section>
+        <!-- Right Section (Map) -->
+        <section class="right-section">
+            <div id="map"></div>
+        </section>
+    </div>
+
+
+
+    
+    <!-- Leaflet Map JS Links -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+        
+    <script>
+        //Map View
+        var map = L.map('map').setView([34.51591084660717, 69.13463930923704], 16);
+        
+        // Map Tile Layer From Open Streeetmap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+            maxBounds: [[-90, -180],[90, 180]],
+            tileSize: 512,
+            zoomOffset: -1,
+            minZoom: 2,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            crossOrigin: true
+        }).addTo(map);
+
+        // Markers
+        var law = L.marker([34.518276305155894, 69.13281103997318]).addTo(map);
+        var es = L.marker([34.51686963212163, 69.12986463341237]).addTo(map);
+        var cs = L.marker([34.513642923976825, 69.13382357386865]).addTo(map);
+        var ec = L.marker([34.51654283734301, 69.13659491857689]).addTo(map);
+        var sc = L.marker([34.51573837891735, 69.1327861818481]).addTo(map);
+        var en = L.marker([34.516242271348226, 69.13922348338176]).addTo(map);
+        var ph = L.marker([34.5163660339312, 69.13317241990927]).addTo(map);
+        var ag = L.marker([34.51847880981487, 69.13786092122582]).addTo(map);
+        var vm = L.marker([34.51522564309805, 69.13348355615896]).addTo(map);
+        var jo = L.marker([34.51858488918188, 69.13430967647078]).addTo(map);
+        var ar = L.marker([34.51353712877599, 69.13242140137649]).addTo(map);
+        var ll = L.marker([34.51597264508406, 69.13715818246044]).addTo(map);
+        var fa = L.marker([34.512932683889666, 69.13203499744266]).addTo(map);
+        var is = L.marker([34.51691967331915, 69.1320832771767]).addTo(map);
+        var ss = L.marker([34.51514279029346, 69.13195453114524]).addTo(map);
+        var esf = L.marker([34.51838712028086, 69.13375697558253]).addTo(map);
+
+        // Popup List
+        
+        es.bindPopup("The Faculty of Environment Science").openPopup();
+        cs.bindPopup("The Faculty of Computer Science").openPopup();
+        ec.bindPopup("The Faculty of Economics").openPopup();
+        sc.bindPopup("The Faculty of Science").openPopup();
+        en.bindPopup("The Faculty of Engineering").openPopup();
+        ph.bindPopup("The Faculty of Pharmacy").openPopup();
+        ag.bindPopup("The Faculty of Agriculture").openPopup();
+        vm.bindPopup("The Faculty of Veterinary Medicine").openPopup();
+        jo.bindPopup("The Faculty of Journalism").openPopup();
+        ar.bindPopup("The Allama Iqbal Faculty of Arts").openPopup();
+        ll.bindPopup("The Faculty of Language and Literature").openPopup();
+        fa.bindPopup("The Faculty of Fine Arts").openPopup();
+        is.bindPopup("The Faculty of Islamic Studies").openPopup();
+        ss.bindPopup("The Faculty of Social Science").openPopup();
+        esf.bindPopup("Psychology and Educational Science Faculty").openPopup();
+        law.bindPopup("The Faculty of Law and Political Sciences").openPopup();
+
+
+        function lawClick() {
+            law.bindPopup("The Faculty of Law and Political Sciences").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("law");
+            element.classList.add("active");
+        }
+        function esClick() {
+            es.bindPopup("The Faculty of Environment Science").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("es");
+            element.classList.add("active");
+        }
+        function csClick() {
+            cs.bindPopup("The Faculty of Computer Science").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("cs");
+            element.classList.add("active");
+        }
+        function ecClick() {
+            ec.bindPopup("The Faculty of Economics").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("ec");
+            element.classList.add("active");
+        }
+        function scClick() {
+            sc.bindPopup("The Faculty of Science").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("sc");
+            element.classList.add("active");
+        }
+        function enClick() {
+            en.bindPopup("The Faculty of Engineering").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("en");
+            element.classList.add("active");
+        }
+        function phClick() {
+            ph.bindPopup("The Faculty of Pharmacy").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("ph");
+            element.classList.add("active");
+        }
+        function agClick() {
+            ag.bindPopup("The Faculty of Agriculture").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("ag");
+            element.classList.add("active");
+        }
+        function vmClick() {
+            vm.bindPopup("The Faculty of Veterinary Medicine").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("vm");
+            element.classList.add("active");
+        }
+        
+        function joClick() {
+            jo.bindPopup("The Faculty of Journalism").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("jo");
+            element.classList.add("active");
+        }
+        function arClick() {
+            ar.bindPopup("The Allama Iqbal Faculty of Arts").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("ar");
+            element.classList.add("active");
+        }
+        function llClick() {
+            ll.bindPopup("The Faculty of Language and Literature").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("ll");
+            element.classList.add("active");
+        }
+        function faClick() {
+            fa.bindPopup("The Faculty of Fine Arts").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("fa");
+            element.classList.add("active");
+        }
+        function isClick() {
+            is.bindPopup("The Faculty of Islamic Studies").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("is");
+            element.classList.add("active");
+        }
+        function ssClick() {
+            ss.bindPopup("The Faculty of Social Science").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("ss");
+            element.classList.add("active");
+        }
+        function esfClick() {
+            esf.bindPopup("Psychology and Educational Science Faculty").openPopup();
+            let ul = document.querySelector('ul');
+            ul.querySelector('.active').classList.remove('active');
+            var element = document.getElementById("esf");
+            element.classList.add("active");
+        }
+
+    </script>
+
+</body>
+</html>
